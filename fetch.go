@@ -49,7 +49,7 @@ func fetchAndParse(year int, country string, ch chan<- Data) {
 	}
 	index := ""
 	for _, value := range r.Parse.Sections {
-		if value["line"] == "Events" {
+		if value["line"] == "Events" || value["line"] == "Events by month" || value["line"] == "Monthly events" {
 			index = value["index"].(string)
 		}
 	}

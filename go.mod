@@ -1,5 +1,4 @@
-module github.com/hcwtam/parse-history
-
+module github.com/hcwtam/parse-events
 go 1.17
 
 require (

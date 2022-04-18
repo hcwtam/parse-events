@@ -2,6 +2,7 @@ package main
 
 import (
 	"sync"
+	"time"
 )
 
 type Data struct {
@@ -17,14 +18,16 @@ func main() {
 
 	println("Generating data...")
 
-	for _, country := range countries {
-		for year := 2000; year < 2022; year++ {
+	for year := 1990; year < 2022; year++ {
+		for _, country := range countries {
 			wg.Add(1)
 			go func(y int, c string) {
 				fetchAndParse(y, c, ch)
 				wg.Done()
 			}(year, country)
 		}
+
+		time.Sleep(5 * time.Second)
 	}
 
 	go func() {

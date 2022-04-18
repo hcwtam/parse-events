@@ -61,12 +61,12 @@ func parse(data Data) Data {
 	})
 	doc.Find(".mw-cite-backlink").Remove()
 
-	c, err := doc.Find("body").Html()
+	c, err := doc.Find("body").Find(".mw-parser-output").Html()
 	if err != nil {
 		fmt.Printf("cannot parse file for \"%d in %s\": %s\n", data.year, data.country, err)
 	}
 
-	data.content = []byte(c)
+	data.content = []byte(strings.Split(c, "<!--")[0]) // Remove comment at the end of html
 
 	return data
 }
